@@ -1,43 +1,36 @@
 # Polat Alemdar
-A modular telegram Python bot running on python3 with an sqlalchemy database.
+Bir sqlalchemy veritabanı ile python3 üzerinde çalışan modüler bir telgraf Python botu..
 
-Originally a simple group management bot with multiple admin features, it has evolved, becoming extremely modular and 
-simple to use.
+Başlangıçta çoklu yönetici özelliklerine sahip basit bir grup yönetimi botu, gelişti, son derece modüler ve kullanımı basit hale geldi.
 
-Can be found on telegram as [Marie](https://t.me/skponline_bot).
+Telegramda [Polat Alemdar](https://t.me/polat_alemdarbot).
+Marie ve ben, botunuzu kurmak için yardım isteyebileceğiniz, yeni özellikler keşfedebileceğiniz/talep edebileceğiniz, hataları bildirebileceğiniz ve yeni bir güncelleme olduğunda döngüde kalabileceğiniz bir [destek kanalı](https://t.me/polatalemdarbothaberler) yönetiyoruz, Elbette bir veritabanı şeması değiştiğinde ve bazı tablo sütunlarının değiştirilmesi/eklenmesi gerektiğinde de yardımcı olacağım. Bakımcılara, tüm şema değişikliklerinin taahhüt mesajlarında bulunacağını ve yeni taahhütleri okuma sorumluluklarının olduğunu unutmayın.
 
-Marie and I are moderating a [support group](https://t.me/polatalemdarbothaberler), where you can ask for help setting up your
-bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. Of course
-I'll also help when a database schema changes, and some table column needs to be modified/added. Note to maintainers that all schema changes will be found in the commit messages, and its their responsibility to read any new commits.
+duyurular ve haberlerden bilgiliniz olması için [KANAL](https://t.me/polatalemdarbothaberler)
 
-Join the [news channel](https://t.me/polatalemdarbothaberler) if you just want to stay in the loop about new features or
-announcements.
+telegram da ben da babba [Bünyo](https://t.me/bunyamin6155)!
 
-Alternatively, [find me on telegram](https://t.me/bunyamin6155)! (Keep all support questions in the support chat, where more people can help you.)
-
-## You can also tap the Deploy To Heroku button below to deploy straight to Heroku!
+## Doğrudan Heroku'ya dağıtmak için aşağıdaki Heroku'ya Dağıt düğmesine de dokunabilirsiniz!
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://https://github.com/bunyamin-6155/Marie-2.0-English)
 
-## Starting the bot.
+## Botu başlatmak.
 
-Once you've setup your database and your configuration (see below) is complete, simply run:
+Veritabanınızı kurduktan ve yapılandırmanız (aşağıya bakın) tamamlandıktan sonra, çalıştırmanız yeterlidir:
 
 `python3 -m tg_bot`
 
 
-## Setting up the bot (Read this before trying to use!):
-Please make sure to use python3.6, as I cannot guarantee everything will work as expected on older python versions!
-This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.6.
+## Botu kurma (Kullanmayı denemeden önce bunu okuyun!):
+Lütfen python3.6 kullandığınızdan emin olun, çünkü her şeyin eski python sürümlerinde beklendiği gibi çalışacağını garanti edemem! Bunun nedeni, işaretleme ayrıştırmasının varsayılan olarak 3.6'da sıralanan bir dict üzerinden yinelenerek yapılmasıdır.
 
-### Configuration
+### Yapılandırma
 
-There are two possible ways of configuring your bot: a config.py file, or ENV variables.
+Botunuzu yapılandırmanın iki olası yolu vardır: bir config.py dosyası veya ENV değişkenleri.
 
-The prefered version is to use a `config.py` file, as it makes it easier to see all your settings grouped together.
-This file should be placed in your `tg_bot` folder, alongside the `__main__.py` file . 
-This is where your bot token will be loaded from, as well as your database URI (if you're using a database), and most of 
-your other settings.
+Tercih edilen sürüm `config.py`tüm ayarlarınızı bir arada gruplanmış olarak görmeyi kolaylaştırdığından bir dosya kullanmaktır .
+Bu dosya `tg_bot` , `__main__.py` dosyanın yanında klasörünüze yerleştirilmelidir .  
+Burası, bot simgenizin yanı sıra veritabanı URI'niz (bir veritabanı kullanıyorsanız) ve diğer ayarlarınızın çoğunun yükleneceği yerdir.
 
 It is recommended to import sample_config and extend the Config class, as this will ensure your config contains all 
 defaults set in the sample_config, hence making it easier to upgrade.
