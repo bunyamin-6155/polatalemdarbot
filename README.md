@@ -12,7 +12,7 @@ telegram da ben da babba [Bünyo](https://t.me/bunyamin6155)!
 
 ## Doğrudan Heroku'ya dağıtmak için aşağıdaki Heroku'ya Dağıt düğmesine de dokunabilirsiniz!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://https://github.com/bunyamin-6155/polatalemdarbot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/bunyamin-6155/polatalemdarbot)
 
 ## Botu başlatmak.
 
