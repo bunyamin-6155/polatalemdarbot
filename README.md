@@ -32,113 +32,108 @@ Tercih edilen sürüm `config.py`tüm ayarlarınızı bir arada gruplanmış ola
 Bu dosya `tg_bot` , `__main__.py` dosyanın yanında klasörünüze yerleştirilmelidir .  
 Burası, bot simgenizin yanı sıra veritabanı URI'niz (bir veritabanı kullanıyorsanız) ve diğer ayarlarınızın çoğunun yükleneceği yerdir.
 
-It is recommended to import sample_config and extend the Config class, as this will ensure your config contains all 
-defaults set in the sample_config, hence making it easier to upgrade.
+sample_config dosyasını içe aktarmanız ve Config sınıfını genişletmeniz önerilir, çünkü bu, yapılandırmanızın
+sample_config içinde ayarlanan tüm varsayılanları içermesini sağlayacak ve böylece yükseltmeyi kolaylaştıracaktır.
 
-An example `config.py` file could be:
+Bir örnek `config.py` dosyası olabilir:
 ```
 from tg_bot.sample_config import Config
 
 
 class Development(Config):
-    OWNER_ID = 1193178307  # my telegram ID
-    OWNER_USERNAME = "bunyamin6155"  # my telegram username
-    API_KEY = "your bot api key"  # my api key, as provided by the botfather
-    SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@localhost:5432/database'  # sample db credentials
-    MESSAGE_DUMP = '-1234567890' # some group chat that your bot is a member of
+    OWNER_ID = 1193178307  # benim telegram ID
+    OWNER_USERNAME = "bunyamin6155"  # benim telegram kullanıcı adı
+    API_KEY = "your bot api key"  # benim api key,botfather'ın verdiği
+    SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@localhost:5432/database'  # database kimlik bilgileri
+    MESSAGE_DUMP = '-1234567890' # botun üye olduğu grup id'si
     USE_MESSAGE_DUMP = True
-    SUDO_USERS = [18673980, 83489514]  # List of id's for users which have sudo access to the bot.
+    SUDO_USERS = [18673980, 83489514]  # Bot'a sudo erişimi olan kullanıcıların id listesi.
     LOAD = []
     NO_LOAD = ['translation']
 ```
 
-If you can't have a config.py file (EG on heroku), it is also possible to use environment variables.
-The following env variables are supported:
- - `ENV`: Setting this to ANYTHING will enable env variables
+Bir config.py dosyanız yoksa (heroku'da örnek), ortam değişkenlerini kullanmak da mümkündür.
+Aşağıdaki env değişkenleri desteklenir:
+ - `ENV`:Bunu HERHANGİ BİR ŞEY olarak ayarlamak env değişkenlerini etkinleştirir
 
- - `TOKEN`: Your bot token, as a string.
- - `OWNER_ID`: An integer of consisting of your owner ID
- - `OWNER_USERNAME`: Your username
+ - `TOKEN`: Bu senin bot token'in.
+ - `OWNER_ID`: Bot sahibinin id'si
+ - `OWNER_USERNAME`: Bot sahibinin kullanıcı adı
 
- - `DATABASE_URL`: Your database URL
- - `MESSAGE_DUMP`: optional: a chat where your replied saved messages are stored, to stop people deleting their old 
- - `LOAD`: Space separated list of modules you would like to load
- - `NO_LOAD`: Space separated list of modules you would like NOT to load
- - `WEBHOOK`: Setting this to ANYTHING will enable webhooks when in env mode
- messages
- - `URL`: The URL your webhook should connect to (only needed for webhook mode)
+ - `DATABASE_URL`: Senin database url
+ - `MESSAGE_DUMP`: isteğe bağlı: insanların eski mesajlarını silmesini önlemek için yanıtladığınız kayıtlı mesajlarınızın saklandığı bir sohbet
+ - `LOAD`:  Yüklemek istediğiniz modüllerin boşlukla ayrılmış listesi
+ - `NO_LOAD`: Yüklemek istemediğiniz modüllerin boşlukla ayrılmış listesi
+ - `WEBHOOK`: Bunu HERHANGİ BİR ŞEY olarak ayarlamak, env modundaki mesajlarda web kancalarını etkinleştirir
+ - 
+ - `URL`: Web kancanızın bağlanması gereken URL (yalnızca web kancası modu için gereklidir)
 
- - `SUDO_USERS`: A space separated list of user_ids which should be considered sudo users
- - `SUPPORT_USERS`: A space separated list of user_ids which should be considered support users (can gban/ungban,
- nothing else)
- - `WHITELIST_USERS`: A space separated list of user_ids which should be considered whitelisted - they can't be banned.
- - `DONATION_LINK`: Optional: link where you would like to receive donations.
- - `CERT_PATH`: Path to your webhook certificate
- - `PORT`: Port to use for your webhooks
- - `DEL_CMDS`: Whether to delete commands from users which don't have rights to use that command
- - `STRICT_GBAN`: Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.
- - `WORKERS`: Number of threads to use. 8 is the recommended (and default) amount, but your experience may vary.
- __Note__ that going crazy with more threads wont necessarily speed up your bot, given the large amount of sql data 
- accesses, and the way python asynchronous calls work.
- - `BAN_STICKER`: Which sticker to use when banning people.
- - `ALLOW_EXCL`: Whether to allow using exclamation marks ! for commands as well as /.
+ - `SUDO_USERS`: Sudo kullanıcıları olarak düşünülmesi gereken, boşlukla ayrılmış kullanıcı id'leri listesi
+ - `SUPPORT_USERS`:Destek kullanıcıları olarak kabul edilmesi gereken, boşlukla ayrılmış bir kullanıcı id'leri listesi (gban/ungban olabilir, başka bir şey değil)
+ - `WHITELIST_USERS`: Beyaz listeye alınmış olarak kabul edilmesi gereken, boşlukla ayrılmış bir kullanıcı id listesi - yasaklanamazlar.
+ - `DONATION_LINK`: İsteğe bağlı: Bağış almak istediğiniz bağlantı.
+ - `CERT_PATH`: Web kancası sertifikanızın yolu
+ - `PORT`: Web kancalarınız için kullanılacak bağlantı noktası
+ - `DEL_CMDS`: Bu komutu kullanma haklarına sahip olmayan kullanıcılardan komutların silinip silinmeyeceği
+ - `STRICT_GBAN`: Eski grupların yanı sıra yeni gruplarda da gban'ları zorunlu kılın. Gbanlı bir kullanıcı konuştuğunda banlanır.
+ - `WORKERS`: Kullanılacak iş parçacığı sayısı. 8, önerilen (ve varsayılan) miktardır, ancak deneyiminiz değişebilir. __Not__ daha iplikle çıldırıyor mutlaka SQL veri erişimlerin büyük miktarda ve yolu piton asenkron çağrılar eser verilmiş, bot hızlandırmak alışkanlık olduğunu..
+ - `BAN_STICKER`:  Kişileri yasaklarken hangi çıkartmanın kullanılacağı.
+ - `ALLOW_EXCL`: Ünlem işareti kullanımına izin verilip verilmeyeceği ! komutların yanı sıra /.
 
-### Python dependencies
+### Python bağımlılıkları
 
-Install the necessary python dependencies by moving to the project directory and running:
+Proje dizinine gidip aşağıdakileri çalıştırarak gerekli python bağımlılıklarını kurun:
 
 `pip3 install -r requirements.txt`.
 
-This will install all necessary python packages.
+Bu, gerekli tüm python paketlerini kuracaktır.
 
 ### Database
 
-If you wish to use a database-dependent module (eg: locks, notes, userinfo, users, filters, welcomes),
-you'll need to have a database installed on your system. I use postgres, so I recommend using it for optimal compatibility.
+Veritabanına bağlı bir modül kullanmak istiyorsanız (örneğin: kilitler, notlar, kullanıcı bilgileri, kullanıcılar, filtreler, karşılamalar),
+sisteminizde bir veritabanının kurulu olması gerekir. Postgres kullanıyorum, bu yüzden optimum uyumluluk için kullanmanızı tavsiye ederim.
 
-In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
+Postgres durumunda, bir debian/ubuntu sisteminde bir veritabanını bu şekilde kurarsınız. Diğer dağıtımlar değişebilir.
 
-- install postgresql:
+- postgresql'i kurun:
 
 `sudo apt-get update && sudo apt-get install postgresql`
 
-- change to the postgres user:
+- postgres kullanıcısına değiştirin:
 
 `sudo su - postgres`
 
-- create a new database user (change YOUR_USER appropriately):
+- yeni bir veritabanı tablosu oluşturun:(Uygun şekilde kullanıcı adı yapın):
 
 `createuser -P -s -e YOUR_USER`
 
-This will be followed by you needing to input your password.
+Bunu, şifrenizi girmeniz gerekerek izleyecektir.
 
-- create a new database table:
+- Yeni bir veritabanı oluşturun:
 
 `createdb -O YOUR_USER YOUR_DB_NAME`
 
-Change YOUR_USER and YOUR_DB_NAME appropriately.
+Kullanıcı adı ve veritabanı adınızı uygun şekilde değşitirin
 
-- finally:
+- Sonunda:
 
 `psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
 
-This will allow you to connect to your database via your terminal.
-By default, YOUR_HOST should be 0.0.0.0:5432.
+Bu, terminaliniz aracılığıyla veritabanınıza bağlanmanıza izin verecektir.
+ Varsayılan olarak, YOUR_HOST 0.0.0.0:5432 olmalıdır.
 
-You should now be able to build your database URI. This will be:
+Artık veritabanı URI'nizi oluşturabilmelisiniz. Bu olacak:
 
 `sqldbtype://username:pw@hostname:port/db_name`
 
-Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc)
-repeat for your username, password, hostname (localhost?), port (5432?), and db name.
+Sqldbtype'ı kullandığınız db ile değiştirin (örneğin postgres, mysql, sqllite, vb.) kullanıcı adınız, parolanız, ana bilgisayar adı (localhost?), bağlantı noktası (5432?) ve db adı için tekrarlayın.
 
-## Modules
-### Setting load order.
+## Modüller
+### Yükleme Sırası Ayarlama.
+Modül yükleme sırası `LOAD` ve `NO_LOAD` konfigürasyon ayarları aracılığıyla değiştirilebilir.
+Bunların her ikisi de listeleri temsil etmelidir.
 
-The module load order can be changed via the `LOAD` and `NO_LOAD` configuration settings.
-These should both represent lists.
-
-If `LOAD` is an empty list, all modules in `modules/` will be selected for loading by default.
+Eğer `LOAD` boş bir liste ise, tüm modüller `modules/` tüm modüller varsayılan olarak yüklenmesi için seçilecektir.
 
 If `NO_LOAD` is not present, or is an empty list, all modules selected for loading will be loaded.
 
